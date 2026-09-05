@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Karen Keyboard Academy</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="logo">က</div>
+    <div><h1>Karen Keyboard Academy</h1><p>Learn • Practice • Play • Master</p></div>
+  </div>
+  <div class="player-stats">
+    <span>⭐ <b id="stars">0</b></span>
+    <span>❤️ <b id="hearts">5</b></span>
+    <span>🪙 <b id="coins">0</b></span>
+    <span>🔥 <b id="streak">0</b></span>
+    <span>Lv <b id="level">1</b></span>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-page="home">🏠 Home</button>
+  <button class="tab" data-page="learn">⌨️ Learn Keys</button>
+  <button class="tab" data-page="practice">✍️ Typing Practice</button>
+  <button class="tab" data-page="games">🎮 Games</button>
+  <button class="tab" data-page="daily">📅 Daily Challenge</button>
+  <button class="tab" data-page="leaderboard">🏆 Leaderboard</button>
+  <button class="tab" data-page="progress">📊 Progress</button>
+  <button class="tab" data-page="data">⚙️ Keyboard Data</button>
+</nav>
+
+<main>
+<section id="home" class="page active">
+  <div class="home-grid">
+    <div class="card hero">
+      <span class="pill">WELCOME</span>
+      <h2>Master the Karen keyboard one character at a time.</h2>
+      <p>Learn the key position first. Then practice consonants, marks, blends, words and real sentences.</p>
+      <div class="hero-buttons">
+        <button class="primary" onclick="switchPage('practice')">Start Typing</button>
+        <button class="ghost" onclick="switchPage('games')">Play a Game</button>
+      </div>
+    </div>
+    <div class="card daily-card">
+      <span class="pill">TODAY</span>
+      <h2>📅 Daily Challenge</h2>
+      <div id="dailySummary"></div>
+      <button class="primary" id="homeDaily">Start Daily Challenge</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-head"><h2>Your Journey</h2><span id="levelTitle" class="level-badge">Level 1</span></div>
+    <div class="xpbar"><div id="xpFill"></div></div>
+    <div class="journey"><span>⭐ <b id="homeXp">0</b> XP</span><span>Next level: <b id="nextXp">100</b> XP</span><span>🏅 <b id="badgeCount">0</b> badges</span></div>
+  </div>
+
+  <div class="quick-grid">
+    <button class="card quick" onclick="startPractice('consonants')"><span>🔤</span><b>Consonants</b><small>25 characters</small></button>
+    <button class="card quick" onclick="startPractice('marks')"><span>◌</span><b>Marks</b><small>20 characters</small></button>
+    <button class="card quick" onclick="startPractice('two')"><span>🧩</span><b>2-Unit Blends</b><small>Start blending</small></button>
+    <button class="card quick" onclick="startPractice('three')"><span>🧩</span><b>3-Unit Blends</b><small>Next level</small></button>
+    <button class="card quick" onclick="startPractice('four')"><span>🧩</span><b>4-Unit Blends</b><small>Advanced</small></button>
+    <button class="card quick" onclick="startPractice('words')"><span>📖</span><b>Words</b><small>Real Karen text</small></button>
+  </div>
+</section>
+
+<section id="learn" class="page">
+  <div class="card">
+    <div class="section-head">
+      <div><span class="pill">KEY MEMORY</span><h2 id="learnTitle">Find the key for the character</h2></div>
+      <label class="toggle"><input type="checkbox" id="showMap" checked> Show target key</label>
+    </div>
+    <div class="learn-target"><div id="learnTarget">က</div><p id="learnHint">Press the key that produces this character.</p></div>
+  </div>
+  <div class="card">
+    <div class="section-head"><h2>Keyboard</h2><span class="muted">Styled to follow real keyboard rows and key sizes</span></div>
+    <div class="key-mode"><span id="shiftIndicator">⇧ Shift OFF</span><span id="fingerHint">Finger: —</span></div><div id="keyboardLearn" class="keyboard"></div>
+    <div class="keyboard-legend"><span><i class="legend-top">ၤ</i> Shift layer</span><span><i class="legend-bottom">မ</i> Normal layer</span><span>Click a key; hold/toggle ⇧ to use the top character.</span></div>
+  </div>
+</section>
+
+<section id="practice" class="page">
+  <div class="practice-layout">
+    <aside class="card practice-menu">
+      <span class="pill">PRACTICE PATH</span>
+      <h2>Choose what to type</h2>
+      <button class="practice-option active" data-type="consonants">🔤 Consonants <small>25</small></button>
+      <button class="practice-option" data-type="marks">◌ Vowels, tones & marks <small>20</small></button>
+      <button class="practice-option" data-type="two">🧩 2-unit blends <small>3</small></button>
+      <button class="practice-option" data-type="three">🧩 3-unit blends <small>3</small></button>
+      <button class="practice-option" data-type="four">🧩 4-unit blends <small>auto</small></button>
+      <button class="practice-option" data-type="words">📖 Words <small>layout examples</small></button>
+      <button class="practice-option" data-type="sentences">📝 Sentences <small>add your own</small></button>
+      <div class="tip">Tip: Finish a level with high accuracy to earn more ⭐ stars and 🪙 coins.</div>
+    </aside>
+    <div class="card practice-main">
+      <div class="section-head">
+        <div><span class="pill">TYPING PRACTICE</span><h2 id="practiceTitle">Consonants</h2></div>
+        <div class="stats"><span>Accuracy <b id="pAccuracy">100%</b></span><span>CPM <b id="pSpeed">0</b></span><label class="kbd-switch"><input type="checkbox" id="karenInput" checked><b>က Karen Keyboard ON</b></label></div>
+      </div>
+      <div class="level-track"><span id="practiceLevel">Level 1</span><span id="practiceCounter">0 / 20</span></div>
+      <div id="prompt" class="prompt"></div>
+      <div class="embedded-keyboard-bar">
+        <span class="keyboard-status" id="keyboardStatus">⌨️ Karen Literacy Keyboard: <b>ON</b></span>
+        <button class="ghost smallbtn" id="shiftToggle">⇧ Shift: OFF</button>
+        <button class="ghost smallbtn" id="capsToggle">⇪ Caps: OFF</button>
+        <button class="ghost smallbtn" id="keyboardToggle">Keyboard: ON</button>
+      </div>
+      <textarea id="typingBox" spellcheck="false" autocomplete="off" autocorrect="off" placeholder="Type with your normal keyboard — Karen characters are entered automatically..."></textarea>
+      <div class="progressbar"><div id="practiceProgress"></div></div>
+      <div class="reward-line" id="rewardLine">Complete the drill to earn XP.</div>
+      <div class="row-actions"><button class="primary" id="newDrill">New Drill</button><button class="ghost" id="clearDrill">Clear</button></div>
+    </div>
+  </div>
+</section>
+
+<section id="games" class="page">
+  <div class="game-grid">
+    <div class="card game">
+      <span class="pill">GAME</span><h2>🎯 Find the Key</h2><p>Press the keyboard key that makes the shown Karen character.</p>
+      <div id="huntTarget" class="giant">က</div><div class="game-score">⭐ <b id="huntScore">0</b> · 🔥 <b id="huntStreak">0</b> · ❤️ <b id="huntLives">3</b></div>
+      <button class="primary" id="startHunt">Start Game</button>
+    </div>
+    <div class="card game">
+      <span class="pill">SPEED</span><h2>⚡ 30-Second Sprint</h2><p>How many correct characters can you type?</p>
+      <div id="sprintPrompt" class="prompt small">Press Start</div><div class="timer" id="timer">30</div>
+      <div class="game-score">CPM <b id="sprintCpm">0</b> · Accuracy <b id="sprintAcc">100%</b></div>
+      <button class="primary" id="startSprint">Start Sprint</button>
+    </div>
+    <div class="card game">
+      <span class="pill">MEMORY</span><h2>🧠 Memory Challenge</h2><p>Look, remember, then type after it disappears.</p>
+      <div id="memorySequence" class="prompt small">Press Start</div><input id="memoryInput" disabled>
+      <div class="game-score">Round <b id="memoryRound">0</b> · Best <b id="memoryBest">0</b></div>
+      <button class="primary" id="startMemory">Start Memory</button>
+    </div>
+    <div class="card game wide">
+      <span class="pill">ARCADE</span><h2>🪂 Falling Characters</h2><p>Catch the characters before they fall off the screen.</p>
+      <canvas id="fallCanvas" width="900" height="330"></canvas>
+      <div class="game-score">⭐ <b id="fallScore">0</b> · Misses <b id="fallMiss">0</b> / 5</div>
+      <button class="primary" id="startFall">Start Falling Game</button>
+    </div>
+  </div>
+</section>
+
+<section id="daily" class="page">
+  <div class="card daily-big">
+    <span class="pill">DAILY CHALLENGE</span><h2 id="dailyTitle">Today's Challenge</h2>
+    <div id="dailyTask" class="daily-task"></div>
+    <div id="dailyStatus" class="reward-line"></div>
+    <button class="primary" id="startDaily">Start</button>
+  </div>
+</section>
+
+<section id="leaderboard" class="page">
+  <div class="card">
+    <div class="section-head"><div><span class="pill">LOCAL SCOREBOARD</span><h2>🏆 Leaderboard</h2></div><button class="ghost" id="clearLeaderboard">Clear Scores</button></div>
+    <p class="muted">This leaderboard is stored on this device. It is ready to become an online leaderboard later.</p>
+    <table class="leaderboard"><thead><tr><th>#</th><th>Player</th><th>Score</th><th>Accuracy</th><th>Level</th><th>Date</th></tr></thead><tbody id="leaderRows"></tbody></table>
+    <div class="save-score"><input id="playerName" maxlength="18" placeholder="Your name"><button class="primary" id="saveScore">Save My Score</button></div>
+  </div>
+</section>
+
+<section id="progress" class="page">
+  <div class="progress-grid">
+    <div class="card big-stat"><span>⭐ Stars</span><strong id="statStars">0</strong></div>
+    <div class="card big-stat"><span>🪙 Coins</span><strong id="statCoins">0</strong></div>
+    <div class="card big-stat"><span>🔥 Streak</span><strong id="statStreak">0</strong></div>
+    <div class="card big-stat"><span>🏅 Badges</span><strong id="statBadges">0</strong></div>
+  </div>
+  <div class="card"><h2>🏅 Badges</h2><div id="badges" class="badges"></div></div>
+  <div class="card"><h2>Weak Keys</h2><p class="muted">The trainer remembers keys you miss most often.</p><div id="weakKeys" class="chips"></div></div>
+</section>
+
+<section id="data" class="page">
+  <div class="card">
+    <span class="pill">CUSTOMIZE</span><h2>Your Karen Keyboard Layout</h2>
+    <p>The starting keyboard was built from your uploaded <b>KL Keyboard Layout.pdf</b>. The screen keyboard uses real-looking rows, including Caps Lock, Enter, Backspace and Shift widths.</p>
+    <div class="data-actions">
+      <button class="primary" id="downloadCsv">Download keyboard.csv</button>
+      <label class="upload primary">Load CSV<input type="file" id="csvInput" accept=".csv,text/csv"></label>
+      <button class="ghost" id="exportProgress">Export Progress</button>
+      <label class="upload ghost">Import Progress<input type="file" id="progressInput" accept=".json,application/json"></label>
+    </div>
+    <div class="warning">The <b>က Karen Keyboard</b> is built directly into this program. Users do <b>not</b> need to install or download a separate keyboard. When Karen Keyboard is ON, physical QWERTY keys are automatically converted using the embedded Karen Literacy layout while typing inside the learning app.</div><div class="warning">If you want to refine the source mapping for your own build, edit <code>data/keyboard.csv</code>.</div>
+  </div>
+  <div class="card"><h2>Practice content</h2><p>Edit <code>data/curriculum.json</code> and <code>data/practice.txt</code> to add more words, blends and sentences.</p></div>
+</section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

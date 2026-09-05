@@ -1,0 +1,86 @@
+{
+  "name": "te-li-karen-keyboard-academy",
+  "productName": "တီၢ်လိကညီကျိာ်",
+  "version": "1.2.0",
+  "description": "တီၢ်လိကညီကျိာ် — Karen keyboard learning and typing academy.",
+  "main": "electron/main.js",
+  "author": "Karen Literacy",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win nsis portable",
+    "dist:mac": "electron-builder --mac dmg zip",
+    "dist:all": "electron-builder --win nsis portable --mac dmg zip",
+    "release": "electron-builder --publish never"
+  },
+  "devDependencies": {
+    "electron": "^38.0.0",
+    "electron-builder": "^26.0.0"
+  },
+  "build": {
+    "appId": "org.karenliteracy.telilikaren",
+    "productName": "တီၢ်လိကညီကျိာ်",
+    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+    "files": [
+      "index.html",
+      "style.css",
+      "app.js",
+      "data/**/*",
+      "electron/**/*",
+      "icon.svg"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "icon.ico"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "category": "public.app-category.education",
+      "icon": "icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "portable": {
+      "artifactName": "${productName}-${version}-Windows-${arch}-Portable.exe"
+    },
+    "dmg": {
+      "title": "တီၢ်လိကညီကျိာ်"
+    }
+  }
+}
