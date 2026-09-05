@@ -8,9 +8,9 @@
   "license": "MIT",
   "scripts": {
     "start": "electron .",
-    "dist:win": "electron-builder --win nsis portable --publish never",                        ↓
+    "dist:win": "electron-builder --win nsis portable --publish never",
     "dist:mac": "electron-builder --mac dmg zip --publish never",
-    "dist:all": "electron-builder --win nsis portable --mac dmg zip",
+    "dist:all": "electron-builder --win nsis portable --mac dmg zip --publish never",
     "release": "electron-builder --publish never"
   },
   "devDependencies": {
